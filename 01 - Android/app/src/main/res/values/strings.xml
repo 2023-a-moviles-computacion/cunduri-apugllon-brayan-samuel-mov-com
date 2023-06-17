@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">MovilesComp2023A</string>
+    <string name="app_name" translatable="false">MovilesComp2023A</string>
+    <string name="bienvenidaes" >Bienvenida ES</string>
+    <color name= "colortext">#FF0E0D0D</color>
+    <color name= "fondoes">#FF7AE852</color>
+
+    <string name="bienvenidaen" >Welcome ENGLISH</string>
+    <color name= "colortexten">#FF0E0D0D</color>
+    <color name= "fondoen">#FF84987D</color>
+
 </resources>
