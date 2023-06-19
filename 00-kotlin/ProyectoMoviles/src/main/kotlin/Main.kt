@@ -152,9 +152,6 @@ fun main(args: Array<String>) {
 }
 
 
-
-}
-
 // void ->Unit
 fun imprimirNombre(nombre: String): Unit{
     println("Nombre : ${nombre}")

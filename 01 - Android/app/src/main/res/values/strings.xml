@@ -1,11 +1,20 @@
 <resources>
     <string name="app_name" translatable="false">MovilesComp2023A</string>
-    <string name="bienvenidaes" >Bienvenida ES</string>
-    <color name= "colortext">#FF0E0D0D</color>
-    <color name= "fondoes">#FF7AE852</color>
+    <string name="bienvenidaes">Bienvenida ES</string>
+    <color name="colortext">#FF0E0D0D</color>
+    <color name="fondoes">#FF7AE852</color>
 
-    <string name="bienvenidaen" >Welcome ENGLISH</string>
-    <color name= "colortexten">#FF0E0D0D</color>
-    <color name= "fondoen">#FF84987D</color>
+    <string name="bienvenidaen">Welcome ENGLISH</string>
+    <color name="colortexten">#FF0E0D0D</color>
+    <color name="fondoen">#FF84987D</color>
+    <string name="title_activity_aaciclo_vida">AACicloVida</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
 </resources>
