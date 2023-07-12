@@ -7,7 +7,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 fun main() {
     var arrayPlaylist : ArrayList<Playlist> = arrayListOf<Playlist>()
-    var arrFarmIndex:ArrayList<Int> = arrayListOf<Int>()
+
     leerArchivo(arrayPlaylist)
     do{
         println("FREE MUSIC PLAYER\n")
@@ -41,14 +41,14 @@ fun main() {
             }
             "5" -> {
                 printPlayLt(arrayPlaylist)
-                println("Seleccione el ID de la farmacia: ")
+                println("Seleccione el ID de la Playlist: ")
                 var idPlt = readLine()!!.toInt()
                 do {
                     printnombrePlaylist(arrayPlaylist,idPlt)
                     println(
                         "1. Listar Canciones\n" +
-                                "2. Insertar canción\n" +
-                                "3. Modificar datos de la canción\n" +
+                                "2. Insertar cancion\n" +
+                                "3. Modificar datos de la cancion\n" +
                                 "4. Borrar cancion\n" +
                                 "5. Salir"
                     )
@@ -67,13 +67,13 @@ fun main() {
                             }while (continuar=="y")
                         }
                         "3" -> {
-                            println("Seleccione el ID de la cancion: ")
+                            println("Digite el ID de la cancion: ")
                             var idSong = readLine()!!.toInt()
                             modificarCancion(arrayPlaylist, idPlt,idSong)
                             printCancion(arrayPlaylist, idPlt)
                         }
                         "4" -> {
-                            println("Seleccione el ID de la cancion: ")
+                            println("Digite el ID de la cancion: ")
                             var idSong = readLine()!!.toInt()
                             borrarCancion(arrayPlaylist, idPlt,idSong)
                             printCancion(arrayPlaylist, idPlt)
@@ -99,21 +99,19 @@ fun crearPlaylist(arrayPlaylist:ArrayList<Playlist>){ // insertar playlist
     var nombre=readLine()!!
     println("Ingrese la descripcion")
     var descripcion=readLine()!!
-    println("Insertar foto? (s/n)")
-    var fotoptionS=readLine()!!
-    var foto = deStringaBoolean(fotoptionS)
+
 
     if(arrayPlaylist.isEmpty()){
         arrayPlaylist.add(Playlist(1,nombre,
-            descripcion, foto, arrayListOf<Cancion>()) )
+            descripcion, arrayListOf<Cancion>()) )
     }else{
         arrayPlaylist.add(Playlist(arrayPlaylist.get(arrayPlaylist.size - 1).idPlaylist +1,nombre,
-            descripcion, foto, arrayListOf<Cancion>()) )
+            descripcion, arrayListOf<Cancion>()) )
     }
 }
 
-fun borrarPlaylist(arrayPLaylist:ArrayList<Playlist>){ // b
-    println("Eliminar Playlist :seleccionar ID: ")
+fun borrarPlaylist(arrayPLaylist:ArrayList<Playlist>){ //
+    println("Eliminar Playlist : digite el ID: ")
     var idPborrar= readLine()!!.toInt()
     for (element in arrayPLaylist) {
         if (element.idPlaylist==idPborrar) {
@@ -124,8 +122,8 @@ fun borrarPlaylist(arrayPLaylist:ArrayList<Playlist>){ // b
     }
 }
 
-fun modificarPlaylist(arrayPlaylist: ArrayList<Playlist>){ // UPdate
-    println("Seleccione el ID de la Playlist")
+fun modificarPlaylist(arrayPlaylist: ArrayList<Playlist>){ // Update
+    println("Digite el ID de la Playlist")
     var idPmodificar= readLine()!!.toInt()
     for (element in arrayPlaylist) {
         if (element.idPlaylist==idPmodificar) {
@@ -133,24 +131,22 @@ fun modificarPlaylist(arrayPlaylist: ArrayList<Playlist>){ // UPdate
             var nombre=readLine()!!
             println("Ingrese la descripcion")
             var descripcion=readLine()!!
-            println("Insertar foto? (s/n)")
-            var fotoptionS=readLine()!!
-            var foto = deStringaBoolean(fotoptionS)
+
 
             println("el index:"+arrayPlaylist.indexOf(element))
             arrayPlaylist.set(arrayPlaylist.indexOf(element),Playlist(element.idPlaylist,nombre,
-                descripcion, foto,element.songs))
+                descripcion,element.songs))
         }
     }
 }
 
 fun printPlayLt(arrayPlaylist: ArrayList<Playlist>){
-    println("ID\tNombre Playlist\tDescripcion\tFoto\n" )
+    println("ID\tNombre Playlist\tDescripcion\n" )
 
     for (playt in arrayPlaylist)
     {
-        println(""+playt.idPlaylist+"\t"+playt.nombre+"\t"+
-                "\t"+playt.foto+"\t"+playt.songs)
+        println(""+playt.idPlaylist+"\t"+playt.nombre+"\t"+playt.descripcion+"\t"+
+                playt.songs)
     }
 }
 
@@ -206,7 +202,7 @@ fun insertarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int){
 
 fun modificarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int,idSong:Int)
 {
-    println("modificar medicamento")
+    println("Modificar Canción")
     var idPlayLt = idPlaylst
     for (element in arrayPlaylist) {
         if (element.idPlaylist==idPlayLt) {
@@ -227,7 +223,7 @@ fun modificarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int,idSong:In
 
 fun borrarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int,idSong:Int)
 {
-    println("borrar medicamento")
+    println("Borrar cancion")
     var idPlaylst= idSong
     for (element in arrayPlaylist) {
         if (element.idPlaylist==idPlaylst) {
@@ -270,7 +266,7 @@ fun leerArchivo(arrayPlaylist: ArrayList<Playlist>){
     }
     var elemntosArchive=ArrayList<String>(fileText.split("\n"))
     for(i in 0..count-1){
-        var (idPlaylist, nombre, descripcion, foto, songs)=elemntosArchive[i].split("|")
+        var (idPlaylist, nombre, descripcion, songs)=elemntosArchive[i].split("|")
         var canciones=ArrayList<String>((songs.substring(1,songs.length-1)).split(","))
         var rolitas=ArrayList<Cancion>() // rolitas = canciones
         if(canciones[0].length>0){
@@ -283,38 +279,20 @@ fun leerArchivo(arrayPlaylist: ArrayList<Playlist>){
         } else {
             println("")
         }
-        var playlist= Playlist(idPlaylist.toInt(),nombre, descripcion, deStringaBoolean(foto), rolitas)
+        var playlist= Playlist(idPlaylist.toInt(),nombre, descripcion, rolitas)
         arrayPlaylist.add(playlist)
     }
 }
 
-fun deStringaBoolean(fotoptionS: String?): Boolean{
-    var datoM= fotoptionS?.uppercase()
-    if (datoM=="S"){
-        return true
-    }
-    else {
-        return false
-    }
-}
-
 data class Playlist(
-/*
-* idPlaylist
-* nombre
-* direccionFarmacia
-* NumeroTelefonicoFarmacia
-* EnOpreacion -> boolean
-* cantidadsucursalesFarmacia
-* */
+
     var idPlaylist:Int,
     var nombre:String,
     var descripcion:String,
-    var foto: Boolean,
     var songs: ArrayList<Cancion>  = arrayListOf<Cancion>()
 ) {
     override fun toString(): String {
-        return "$idPlaylist|$nombre|$descripcion|$foto|${songs.toString()}\n"
+        return "$idPlaylist|$nombre|$descripcion|${songs.toString()}\n"
         /* return "{\n" +
                  "\t\"id\":$id,\n" +
                  "\t\"nombre\":\"$nombre\",\n" +
@@ -328,14 +306,7 @@ data class Playlist(
 }
 
 data class Cancion(
-/*
-* idFarmacia
-* idMedicamento
-* nombreGenericoMedicamento
-* precioMedicamento
-* cantidadMedicamento
-* fechaCaducidadMedicamento
-* */
+
     var idPlyt:Int,
     var idCancion: Int,
     var nombreCancion:String,
