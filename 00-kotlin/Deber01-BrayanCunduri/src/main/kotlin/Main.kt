@@ -99,8 +99,7 @@ fun crearPlaylist(arrayPlaylist:ArrayList<Playlist>){ // insertar playlist
     var nombre=readLine()!!
     println("Ingrese la descripcion")
     var descripcion=readLine()!!
-
-
+    
     if(arrayPlaylist.isEmpty()){
         arrayPlaylist.add(Playlist(1,nombre,
             descripcion, arrayListOf<Cancion>()) )
@@ -131,7 +130,6 @@ fun modificarPlaylist(arrayPlaylist: ArrayList<Playlist>){ // Update
             var nombre=readLine()!!
             println("Ingrese la descripcion")
             var descripcion=readLine()!!
-
 
             println("el index:"+arrayPlaylist.indexOf(element))
             arrayPlaylist.set(arrayPlaylist.indexOf(element),Playlist(element.idPlaylist,nombre,
@@ -172,6 +170,7 @@ fun printCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int){ //printMed
             }
         }}
 }
+
 fun insertarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int){
     println("Insertar cancion")
     var idPlayLt= idPlaylst
@@ -293,15 +292,7 @@ data class Playlist(
 ) {
     override fun toString(): String {
         return "$idPlaylist|$nombre|$descripcion|${songs.toString()}\n"
-        /* return "{\n" +
-                 "\t\"id\":$id,\n" +
-                 "\t\"nombre\":\"$nombre\",\n" +
-                 "\t\"direccion\":\"$direccion\",\n" +
-                 "\t\"numeroTelefonico\":\"$numeroTelefonico\",\n" +
-                 "\t\"enOperacion\":$enOperacion,\n" +
-                 "\t\"meds\":\n" +
-                 "\t${meds.toString()},\n" +
-                 "\t},\n"*/
+
     }
 }
 
@@ -312,17 +303,10 @@ data class Cancion(
     var nombreCancion:String,
     var artista: String,
     var genero:String,
-    //var anioRelease:localDate, // anio de lanzamiento
+
 ) {
     override fun toString(): String {
-        /* return "\t\t{\n" +
-                  "\t\t\"idFarmacia\":$idFarmacia,\n" +
-                  "\t\t\"idMedicamento\":$idMedicamento,\n" +
-                  "\t\t\"nombre\":\"$nombre\",\n" +
-                  "\t\t\"precio\":$precio,\n" +
-                  "\t\t\"cantidad\":$cantidad,\n" +
-                  "\t\t\"fechaCaducidad\":\"$fechaCaducidad\"\n" +
-                  "\t\t}\n"*/
+
         return "$idPlyt;$idCancion;$nombreCancion;$artista;$genero"
     }
 }
