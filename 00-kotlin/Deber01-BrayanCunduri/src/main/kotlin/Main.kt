@@ -48,7 +48,7 @@ fun main() {
                     println(
                         "1. Listar Canciones\n" +
                                 "2. Insertar cancion\n" +
-                                "3. Modificar datos de la cancion\n" +
+                                "3. Editar datos de la cancion\n" +
                                 "4. Borrar cancion\n" +
                                 "5. Salir"
                     )
@@ -61,7 +61,7 @@ fun main() {
                             var continuar = "y"
                             do {
                                 insertarCancion(arrayPlaylist, idPlt)
-                                printCancion(arrayPlaylist, idPlt)
+
                                 println("Seguir insertando? y/n")
                                 continuar = readLine()!!
                             }while (continuar=="y")
@@ -70,7 +70,7 @@ fun main() {
                             println("Digite el ID de la cancion: ")
                             var idSong = readLine()!!.toInt()
                             modificarCancion(arrayPlaylist, idPlt,idSong)
-                            printCancion(arrayPlaylist, idPlt)
+
                         }
                         "4" -> {
                             println("Digite el ID de la cancion: ")
@@ -99,7 +99,7 @@ fun crearPlaylist(arrayPlaylist:ArrayList<Playlist>){ // insertar playlist
     var nombre=readLine()!!
     println("Ingrese la descripcion")
     var descripcion=readLine()!!
-    
+
     if(arrayPlaylist.isEmpty()){
         arrayPlaylist.add(Playlist(1,nombre,
             descripcion, arrayListOf<Cancion>()) )
@@ -110,7 +110,7 @@ fun crearPlaylist(arrayPlaylist:ArrayList<Playlist>){ // insertar playlist
 }
 
 fun borrarPlaylist(arrayPLaylist:ArrayList<Playlist>){ //
-    println("Eliminar Playlist : digite el ID: ")
+    println("Digite el ID de la playlist a eliminar: ")
     var idPborrar= readLine()!!.toInt()
     for (element in arrayPLaylist) {
         if (element.idPlaylist==idPborrar) {
@@ -201,7 +201,7 @@ fun insertarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int){
 
 fun modificarCancion(arrayPlaylist: ArrayList<Playlist>,idPlaylst: Int,idSong:Int)
 {
-    println("Modificar Canción")
+    println("Modificar Cancion")
     var idPlayLt = idPlaylst
     for (element in arrayPlaylist) {
         if (element.idPlaylist==idPlayLt) {
