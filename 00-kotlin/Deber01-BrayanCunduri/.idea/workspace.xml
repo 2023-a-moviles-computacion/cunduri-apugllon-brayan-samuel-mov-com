@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6fcbfde7-c7c0-4df0-8471-1e12a655360f" name="Changes" comment="" />
+    <list default="true" id="6fcbfde7-c7c0-4df0-8471-1e12a655360f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/kotlinc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/Deber-01-Brayan-Cunduri.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/out/Resultados/Farmacias.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/out/production/Deber-01-Brayan-Cunduri/Farmaciia.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/out/production/Deber-01-Brayan-Cunduri/META-INF/Deber-01-Brayan-Cunduri.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/out/production/Deber-01-Brayan-Cunduri/MainKt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/out/production/Deber-01-Brayan-Cunduri/Mediicamento.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/src/main/deber-01-brayan-cunduri.kts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Deber-01-Brayan-Cunduri/src/main/kotlin/Main.kt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../01 - Android/app/src/main/res/layout/activity_ecrud_entrenador.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../01 - Android/app/src/main/res/layout/activity_ecrud_entrenador.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../01 - Android/app/src/main/res/layout/recycler_view_vista.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../01 - Android/app/src/main/res/layout/recycler_view_vista.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +74,9 @@
       <option name="presentableId" value="Default" />
       <updated>1687111728959</updated>
       <workItem from="1687111730559" duration="12800000" />
-      <workItem from="1689200185450" duration="9416000" />
+      <workItem from="1689200185450" duration="10017000" />
+      <workItem from="1689220377112" duration="592000" />
+      <workItem from="1689353010911" duration="1911000" />
     </task>
     <servers />
   </component>
