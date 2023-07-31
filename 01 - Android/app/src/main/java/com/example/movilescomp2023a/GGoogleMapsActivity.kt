@@ -32,7 +32,7 @@ class GGoogleMapsActivity : AppCompatActivity() {
 
     fun irCarolina(){
         val carolina = LatLng(-0.1825684318486696,
-        -78.48447277600916)
+            -78.48447277600916)
         val zoom = 17f
         moverCamaraConZoom(carolina, zoom)
     }
