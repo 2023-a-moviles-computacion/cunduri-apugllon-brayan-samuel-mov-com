@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 class Cancion (
 
-    val idCancion: Int,
+    var idCancion: Int,
     var nombreCancion:String?,
     var artista: String?,
     var duracion: Int?,
@@ -35,6 +35,10 @@ class Cancion (
 
     override fun describeContents(): Int {
         return 0
+    }
+
+    override fun toString(): String {
+        return "${nombreCancion}"
     }
 
     companion object CREATOR : Parcelable.Creator<Cancion> {

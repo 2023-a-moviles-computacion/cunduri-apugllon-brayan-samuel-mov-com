@@ -9,8 +9,11 @@ import com.google.android.material.textfield.TextInputEditText
 
 class CrearCancion : AppCompatActivity() {
 
-    var nextId = 0
-    var lastId = 0
+    var nextIdCancion = 0
+    var lastIdCancion = 0
+
+    var nextIdP_C=0
+    var lastIdP_C=0
     var idCancionSeleccionada = 0
     var playlistPos = 0
     var idPlaylisT = 0
@@ -28,23 +31,39 @@ class CrearCancion : AppCompatActivity() {
         playlistPos = intent.getIntExtra("posicionPlaylist",-1)
         Log.i("posPlaylist","${playlistPos}")
 
-        BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist : Playlist ->
+        /*BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist : Playlist ->
 
+            if (indice == playlistPos){
+                idPlaylisT = playlist.idPlaylist
+            }
+        }*/
+
+        EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists().forEachIndexed{ indice: Int, playlist : Playlist ->
             if (indice == playlistPos){
                 idPlaylisT = playlist.idPlaylist
             }
         }
 
-        var longLCancion = BBaseDeDatosMemoria.arregloPlaylist_Cancion.lastIndex
+        //var longLCancion = BBaseDeDatosMemoria.arregloPlaylist_Cancion.lastIndex
+        var longLCancion = EquipoBaseDeDatos.TablaPlaylist!!.listarCanciones().lastIndex
 
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion : Playlist_Cancion ->
-
+        EquipoBaseDeDatos.TablaPlaylist!!.listarCanciones().forEachIndexed{ indice: Int, cancion : Cancion ->
+            Log.i("testExamen","${cancion.idCancion} -> ${cancion.nombreCancion}")
             if (indice == longLCancion){
-                lastId = playlist_cancion.idPlaylist_Cancion
+                lastIdCancion = cancion.idCancion
             }
         }
 
-        nextId = lastId+1
+        nextIdCancion = lastIdCancion+1
+
+        var longP_C = Registros.arregloPlaylist_Cancion.lastIndex
+        Registros.arregloPlaylist_Cancion.forEachIndexed{indice: Int, e_j:Playlist_Cancion ->
+            if(indice==longP_C){
+                lastIdP_C=e_j.idPlaylist_Cancion
+            }
+
+        }
+        nextIdP_C=lastIdP_C+1
 
         var txtNombre = findViewById<TextInputEditText>(R.id.txtIn_nombreC_crear)
         var txtArtista = findViewById<TextInputEditText>(R.id.txtIn_artistaC_crear)
@@ -56,15 +75,13 @@ class CrearCancion : AppCompatActivity() {
         btnAddCancion.setOnClickListener {
             var nombre = txtNombre.text.toString()
             var artista= txtArtista.text.toString()
-            var duracion= txtDuracion.text.toString().toInt()
+            var duracion= txtDuracion.text.toString()
             var genero= txtGenero.text.toString()
-            var anioRealease= txtAnioRelease.text.toString().toInt()
-            BBaseDeDatosMemoria.arregloPlaylist_Cancion.add(
-                Playlist_Cancion(nextId,nombre,idPlaylisT,idCancionSeleccionada)
+            var anioRealease= txtAnioRelease.text.toString()
+            Registros.arregloPlaylist_Cancion.add(
+                Playlist_Cancion(nextIdP_C,idPlaylisT, nextIdCancion)
             )
-            BBaseDeDatosMemoria.arregloCancion.add(
-                Cancion(idCancionSeleccionada,nombre,artista,duracion,genero,anioRealease)
-            )
+            EquipoBaseDeDatos.TablaPlaylist!!.crearCancion(nextIdCancion,nombre,artista,duracion,genero,anioRealease)
             respuesta()
         }
 

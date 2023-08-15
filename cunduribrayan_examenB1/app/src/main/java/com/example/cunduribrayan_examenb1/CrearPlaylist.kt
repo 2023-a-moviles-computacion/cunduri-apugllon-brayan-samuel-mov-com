@@ -13,9 +13,9 @@ class CrearPlaylist : AppCompatActivity() {
     var lastId = 0
     var nombrePlaylist = ""
     var descripcionPlaylist= ""
-    var anioCreacion= 0
+    var anioCreacion= ""
     var autorPlaylist = ""
-    var numCanciones = 0
+    var numCanciones = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +25,8 @@ class CrearPlaylist : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         Log.i("ciclo-vida","onStart")
-        var longitudListaEntreador = BBaseDeDatosMemoria.arregloPlaylist.lastIndex
-        BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist : Playlist ->
+        var longitudListaEntreador = EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists().lastIndex
+        EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists().forEachIndexed{ indice: Int, playlist : Playlist ->
             Log.i("testExamen","${playlist.idPlaylist} -> ${playlist.nombrePlaylist}")
             if (indice == longitudListaEntreador){
                 lastId = playlist.idPlaylist
@@ -45,13 +45,11 @@ class CrearPlaylist : AppCompatActivity() {
         btnCrearPlaylist.setOnClickListener {
             nombrePlaylist = txtInNombreP.text.toString()
             descripcionPlaylist = txtInDescripcion.text.toString()
-            anioCreacion= txtInAnioCreacion.text.toString().toInt()
+            anioCreacion= txtInAnioCreacion.text.toString()
             autorPlaylist= txtInAutorP.text.toString()
-            numCanciones= txtInNumCancion.text.toString().toInt()
+            numCanciones= txtInNumCancion.text.toString()
 
-            BBaseDeDatosMemoria.arregloPlaylist.add(
-                Playlist(nextId, nombrePlaylist, descripcionPlaylist,anioCreacion,autorPlaylist,numCanciones)
-            )
+            EquipoBaseDeDatos.TablaPlaylist!!.crearPlaylist(nextId, nombrePlaylist, descripcionPlaylist,anioCreacion,autorPlaylist,numCanciones)
             val intentAddSucces = Intent(this, InicioPlaylist::class.java)
             startActivity(intentAddSucces)
         }

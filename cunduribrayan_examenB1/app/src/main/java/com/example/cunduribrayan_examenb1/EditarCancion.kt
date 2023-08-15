@@ -20,7 +20,7 @@ class EditarCancion : AppCompatActivity() {
         Log.i("ciclo-vida", "onStart")
         super.onStart()
 
-        val idPlaylist_Cancion = intent.getIntExtra("cancion",1)
+        //val idPlaylist_Cancion = intent.getIntExtra("cancion",1)
         playlistPos = intent.getIntExtra("posicionPlaylisteditar",1)
 
         val txtNombreC = findViewById<TextInputEditText>(R.id.txtIn_nombreC_editar)
@@ -30,17 +30,18 @@ class EditarCancion : AppCompatActivity() {
         val txtanioreleaseC = findViewById<TextInputEditText>(R.id.txtIn_anioC_editar)
 
 
-        var idPlaYlist: Int = 0
+        // var idPlaYlist: Int = 0
+        var idCancion = intent.getIntExtra("cancion",1)
 
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion : Playlist_Cancion ->
+        /*BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion : Playlist_Cancion ->
             if (idPlaylist_Cancion == playlist_cancion.idPlaylist_Cancion){
                 txtNombreC.setText(playlist_cancion.nombreP_C)
                 idPlaYlist = playlist_cancion.idCancion
             }
-        }
+        }*/
 
-        BBaseDeDatosMemoria.arregloCancion.forEachIndexed{ indice: Int, cancion : Cancion ->
-            if (idPlaYlist == cancion.idCancion){
+        EquipoBaseDeDatos.TablaPlaylist!!.listarCanciones().forEachIndexed{ indice: Int, cancion : Cancion ->
+            if (cancion.idCancion == idCancion){
                 txtNombreC.setText(cancion.nombreCancion)
                 txtartistaC.setText(cancion.artista)
                 txtduracionC.setText(cancion.duracion.toString())
@@ -51,22 +52,23 @@ class EditarCancion : AppCompatActivity() {
 
         val btnEditarCancion = findViewById<Button>(R.id.btn_editar_cancion)
         btnEditarCancion.setOnClickListener {
-            BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion: Playlist_Cancion ->
+            /*BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion: Playlist_Cancion ->
                 if (idPlaylist_Cancion == playlist_cancion.idPlaylist_Cancion){
                     Log.i("editar","${txtNombreC.text.toString()}")
                     playlist_cancion.nombreP_C = (txtNombreC.text.toString())
                 }
-            }
-            BBaseDeDatosMemoria.arregloCancion.forEachIndexed{ indice: Int, cancion: Cancion ->
-                if(idPlaYlist==cancion.idCancion){
-                    cancion.nombreCancion=txtNombreC.text.toString()
-                    cancion.artista=txtartistaC.text.toString()
-                    cancion.duracion=txtduracionC.text.toString().toInt()
-                    cancion.genero=txtgeneroC.text.toString()
-                    cancion.anioRelease=txtanioreleaseC.text.toString().toInt()
-                }
+            }*/
+            //BBaseDeDatosMemoria.arregloCancion.forEachIndexed{ indice: Int, cancion: Cancion ->
+              //  if(idPlaYlist==cancion.idCancion){
+                    var nombreCancion=txtNombreC.text.toString()
+                    var artista=txtartistaC.text.toString()
+                    var duracion=txtduracionC.text.toString()
+                    var genero=txtgeneroC.text.toString()
+                    var anioRelease=txtanioreleaseC.text.toString()
+            EquipoBaseDeDatos.TablaPlaylist!!.actualizarCancion(idCancion,nombreCancion,artista,duracion,genero,anioRelease)
+                //}
 
-            }
+            //}
 
             respuesta()
         }

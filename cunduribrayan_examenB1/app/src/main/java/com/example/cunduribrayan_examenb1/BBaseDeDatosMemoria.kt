@@ -29,7 +29,7 @@ class BBaseDeDatosMemoria {
             arregloCancion.add(
                 Cancion(3,"Everything","Hulvey",3,"Regueton",2022)
             )
-
+           /*
             // Playlists y Canciones
             arregloPlaylist_Cancion.add(
                 Playlist_Cancion(1, "Calling", 1,2)
@@ -48,7 +48,7 @@ class BBaseDeDatosMemoria {
             )
             arregloPlaylist_Cancion.add(
                 Playlist_Cancion(6, "Calling",3,2)
-            )
+            )*/
 
         }
 

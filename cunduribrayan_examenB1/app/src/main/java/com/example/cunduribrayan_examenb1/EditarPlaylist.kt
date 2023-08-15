@@ -26,7 +26,7 @@ class EditarPlaylist : AppCompatActivity() {
         val editarAutorPlaylist = findViewById<TextInputEditText>(R.id.txtIn_autorP_editar2)
         val editarNumC = findViewById<TextInputEditText>(R.id.txtIn_numCP_editar2)
 
-        BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist : Playlist ->
+        EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists().forEachIndexed{ indice: Int, playlist : Playlist ->
 
             if (indice == posicionPlaylist){
                 editarNombreP.setText(playlist.nombrePlaylist.toString())
@@ -39,16 +39,17 @@ class EditarPlaylist : AppCompatActivity() {
 
         val btnGuardarCambios = findViewById<Button>(R.id.btn_guardar_cambios2)
         btnGuardarCambios.setOnClickListener {
-            BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist: Playlist ->
-                if (indice == posicionPlaylist){
+            //BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist: Playlist ->
+              //  if (indice == posicionPlaylist){
 
-                    playlist.nombrePlaylist = editarNombreP.text.toString()
-                    playlist.descripcionPlaylist = editarDescripcion.text.toString()
-                    playlist.anioCreacion = editarAnioCreacion.text.toString().toInt()
-                    playlist.autorPlaylist = editarAutorPlaylist.text.toString()
-                    playlist.numCanciones = editarNumC.text.toString().toInt()
-                }
-            }
+                    var nombrePlaylist = editarNombreP.text.toString()
+                    var descripcionPlaylist = editarDescripcion.text.toString()
+                    var anioCreacion = editarAnioCreacion.text.toString().toInt()
+                    var autorPlaylist = editarAutorPlaylist.text.toString()
+                    var numCanciones = editarNumC.text.toString().toInt()
+                    EquipoBaseDeDatos.TablaPlaylist!!.actualizarPlaylist(posicionPlaylist,
+                        nombrePlaylist,descripcionPlaylist,anioCreacion.toString(),autorPlaylist,numCanciones.toString())
+               // }
             val intentEditSucces = Intent(this, InicioPlaylist::class.java)
             startActivity(intentEditSucces)
         }

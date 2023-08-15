@@ -5,7 +5,7 @@ import android.os.Parcelable
 
 class Playlist (
 
-    val idPlaylist: Int,
+    var idPlaylist: Int,
     var nombrePlaylist: String?,
     var descripcionPlaylist: String?,
     var anioCreacion: Int?,

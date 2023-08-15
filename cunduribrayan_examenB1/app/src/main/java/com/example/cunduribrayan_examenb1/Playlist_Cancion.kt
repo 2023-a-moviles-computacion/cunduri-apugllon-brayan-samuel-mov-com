@@ -6,19 +6,19 @@ import android.os.Parcelable
 class Playlist_Cancion (
 
     val idPlaylist_Cancion: Int,
-    var nombreP_C: String?,
+    //var nombreP_C: String?,
     val idPlaylist: Int,
     val idCancion: Int
 
     ): Parcelable  {
 
-    override fun toString(): String {
-        return "${nombreP_C}"
-    }
+    //override fun toString(): String {
+      //  return "${nombreP_C}"
+    //}
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString(),
+        //parcel.readString(),
         parcel.readInt(),
         parcel.readInt()
     ) {
@@ -26,7 +26,7 @@ class Playlist_Cancion (
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(idPlaylist_Cancion)
-        parcel.writeString(nombreP_C)
+        //parcel.writeString(nombreP_C)
         parcel.writeInt(idPlaylist)
         parcel.writeInt(idCancion)
     }

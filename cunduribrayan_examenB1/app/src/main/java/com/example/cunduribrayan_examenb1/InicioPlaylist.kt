@@ -31,7 +31,8 @@ class InicioPlaylist : AppCompatActivity() {
         val adaptador = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            BBaseDeDatosMemoria.arregloPlaylist
+            //BBaseDeDatosMemoria.arregloPlaylist
+            EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists()
         )
         listViewEntrenador.adapter = adaptador
         adaptador.notifyDataSetChanged()
@@ -49,9 +50,9 @@ class InicioPlaylist : AppCompatActivity() {
     override fun onSaveInstanceState(outState: Bundle) {
         outState.run {
             putInt("idItemSeleccionado",idItemSeleccionado)
-            putParcelableArrayList("arregloEntrenador",BBaseDeDatosMemoria.arregloPlaylist)
-            putParcelableArrayList("arregloEntrenadorXpokemon",BBaseDeDatosMemoria.arregloPlaylist_Cancion)
-            putParcelableArrayList("arregloPokemon",BBaseDeDatosMemoria.arregloCancion)
+            putParcelableArrayList("arregloEntrenador",EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists())
+            putParcelableArrayList("arregloP-C",Registros.arregloPlaylist_Cancion)
+            //putParcelableArrayList("arregloPokemon",BBaseDeDatosMemoria.arregloCancion)
         }
         super.onSaveInstanceState(outState)
     }
@@ -59,9 +60,11 @@ class InicioPlaylist : AppCompatActivity() {
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         idItemSeleccionado = savedInstanceState.getInt("idItemSeleccionado")
-        BBaseDeDatosMemoria.arregloPlaylist = savedInstanceState.getParcelableArrayList<Playlist>("arregloEntrenador")!!
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion = savedInstanceState.getParcelableArrayList<Playlist_Cancion>("arregloEntrenadorXpokemon")!!
-        BBaseDeDatosMemoria.arregloCancion = savedInstanceState.getParcelableArrayList<Cancion>("arregloPokemon")!!
+
+        Registros.arregloPlaylist_Cancion = savedInstanceState.getParcelableArrayList<Playlist_Cancion>("arregloP-C")!!
+        //BBaseDeDatosMemoria.arregloPlaylist = savedInstanceState.getParcelableArrayList<Playlist>("arregloEntrenador")!!
+        //BBaseDeDatosMemoria.arregloPlaylist_Cancion = savedInstanceState.getParcelableArrayList<Playlist_Cancion>("arregloEntrenadorXpokemon")!!
+        //BBaseDeDatosMemoria.arregloCancion = savedInstanceState.getParcelableArrayList<Cancion>("arregloPokemon")!!
         if (idItemSeleccionado == null){
             idItemSeleccionado = 0
         }
@@ -69,7 +72,8 @@ class InicioPlaylist : AppCompatActivity() {
         val adaptador = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            BBaseDeDatosMemoria.arregloPlaylist
+            EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists()
+            //BBaseDeDatosMemoria.arregloPlaylist
         )
         listViewEntrenador.adapter = adaptador
         adaptador.notifyDataSetChanged()
@@ -99,7 +103,16 @@ class InicioPlaylist : AppCompatActivity() {
             }
             R.id.mi_eliminar -> {
                 Log.i("context-menu", "Delete position: ${idItemSeleccionado}")
-                eliminarEntrenador(idItemSeleccionado)
+                EquipoBaseDeDatos.TablaPlaylist!!.eliminarPlaylists(idItemSeleccionado)
+                val listViewPlaylist = findViewById<ListView>(R.id.lv_playlists_lista)
+                val adaptador = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists()
+                )
+                listViewPlaylist.adapter = adaptador
+                adaptador.notifyDataSetChanged()
+                //eliminarEntrenador(idItemSeleccionado)
                 return true
             }
             R.id.mi_canciones -> {
@@ -117,34 +130,6 @@ class InicioPlaylist : AppCompatActivity() {
         val intentEditarEntrenador = Intent(this, clase)
         intentEditarEntrenador.putExtra("posicionEditar", idItemSeleccionado)
         startActivity(intentEditarEntrenador)
-    }
-
-    fun eliminarEntrenador(
-        posicioEntrenadorEnliminar: Int
-    ) {
-        val listViewEntrenador = findViewById<ListView>(R.id.lv_playlists_lista)
-
-        var entrenadorAeliminar = BBaseDeDatosMemoria.arregloPlaylist.elementAt(posicioEntrenadorEnliminar)
-        var idEntrenadorAeliminar = entrenadorAeliminar.idPlaylist
-
-        var auxListaEntrenadorXpokemon = arrayListOf<Playlist_Cancion>()
-
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion: Playlist_Cancion ->
-            if(idEntrenadorAeliminar != playlist_cancion.idPlaylist){
-                auxListaEntrenadorXpokemon.add(playlist_cancion)
-            }
-        }
-
-        BBaseDeDatosMemoria.arregloPlaylist.removeAt(posicioEntrenadorEnliminar)
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion = auxListaEntrenadorXpokemon
-
-        val adaptador = ArrayAdapter(
-            this,
-            android.R.layout.simple_list_item_1,
-            BBaseDeDatosMemoria.arregloPlaylist
-        )
-        listViewEntrenador.adapter = adaptador
-        adaptador.notifyDataSetChanged()
     }
 
 }

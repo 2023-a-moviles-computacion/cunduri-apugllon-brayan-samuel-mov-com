@@ -18,8 +18,8 @@ class InicioCancion : AppCompatActivity() {
     var playlistPos = 0
     var itemS = 0
 
-    var listaCanciones = arrayListOf<String>()
-    var idP_C = arrayListOf<Int>()
+    //var listaCanciones = arrayListOf<String>()
+    //var idP_C = arrayListOf<Int>()
 
     var resultAnadirCancion = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -50,38 +50,58 @@ class InicioCancion : AppCompatActivity() {
         setContentView(R.layout.activity_inicio_cancion)
     }
 
+    fun listViewCanciones():ArrayList<Cancion> {
+        var listaIDCanciones = arrayListOf<Int>()
+
+        Registros.arregloPlaylist_Cancion.forEachIndexed { indice: Int, playlistCancion: Playlist_Cancion ->
+            if (playlistCancion.idPlaylist == idPlaylisT) {
+                listaIDCanciones.add(playlistCancion.idCancion)
+            }
+        }
+        var listaCanciones = arrayListOf<Cancion>()
+        EquipoBaseDeDatos.TablaPlaylist!!.listarCanciones()
+            .forEachIndexed { indice: Int, cancion: Cancion ->
+                for (i in listaIDCanciones) {
+                    if (i == cancion.idCancion) {
+                        listaCanciones.add(cancion)
+                    }
+                }
+            }
+        return listaCanciones
+    }
+
     override fun onStart() {
         super.onStart()
         Log.i("ciclo-vida", "onStart")
 
-        listaCanciones = arrayListOf()
-        idP_C = arrayListOf()
+        //listaCanciones = arrayListOf()
+        //idP_C = arrayListOf()
 
         playlistPos = intent.getIntExtra("posicionEditar",1)
 
-        val nombrePlaylist_cancion = findViewById<TextView>(R.id.tv_nombreP_C)
+        //val nombrePlaylist_cancion = findViewById<TextView>(R.id.tv_nombreP_C)
 
-        BBaseDeDatosMemoria.arregloPlaylist.forEachIndexed{ indice: Int, playlist : Playlist ->
+        EquipoBaseDeDatos.TablaPlaylist!!.listarPlaylists().forEachIndexed{ indice: Int, playlist : Playlist ->
             if (indice == playlistPos){
-                idPlaylisT  = playlist.idPlaylist
-                var label = "Playlist: ${playlist.nombrePlaylist}"
-                nombrePlaylist_cancion.setText(label)
+                val txtNombrePlaylist=findViewById<TextView>(R.id.tv_nombreP_C)
+                txtNombrePlaylist.setText("Playlist: "+playlist.nombrePlaylist)
+                idPlaylisT=playlist.idPlaylist
             }
         }
 
-        BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion : Playlist_Cancion ->
+        /*BBaseDeDatosMemoria.arregloPlaylist_Cancion.forEachIndexed{ indice: Int, playlist_cancion : Playlist_Cancion ->
             if (idPlaylisT == playlist_cancion.idPlaylist){
                 listaCanciones.add(playlist_cancion.nombreP_C.toString())
                 idP_C.add(playlist_cancion.idPlaylist_Cancion)
             }
-        }
+        }*/
 
         val listViewCancion = findViewById<ListView>(R.id.lv_canciones_lista)
 
         val adaptador = ArrayAdapter(
             this,
             android.R.layout.simple_list_item_1,
-            listaCanciones
+            listViewCanciones()
         )
         listViewCancion.adapter = adaptador
         adaptador.notifyDataSetChanged()
@@ -102,6 +122,21 @@ class InicioCancion : AppCompatActivity() {
 
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        val listViewCancion = findViewById<ListView>(R.id.lv_canciones_lista)
+
+        val adaptador = ArrayAdapter(
+            this,
+            android.R.layout.simple_list_item_1,
+            listViewCanciones()
+        )
+        listViewCancion.adapter = adaptador
+        adaptador.notifyDataSetChanged()
+
+    }
+
     override fun onCreateContextMenu(
         menu: ContextMenu?,
         v: View?,
@@ -113,7 +148,8 @@ class InicioCancion : AppCompatActivity() {
         val info = menuInfo as AdapterView.AdapterContextMenuInfo
         val id = info.position
         itemS = id
-        idItemSeleccionado = idP_C.elementAt(id)
+        val idR=listViewCanciones()[id].idCancion
+        idItemSeleccionado = idR//idP_C.elementAt(id)
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
@@ -125,7 +161,15 @@ class InicioCancion : AppCompatActivity() {
             }
             R.id.mi_eliminarCancion -> {
                 Log.i("context-menu", "Delete position: ${idItemSeleccionado}")
-                eliminarCancion(idItemSeleccionado)
+                EquipoBaseDeDatos.TablaPlaylist!!.eliminarCanciones(idItemSeleccionado)
+                val listViewCancion = findViewById<ListView>(R.id.lv_canciones_lista)
+                val adaptador = ArrayAdapter(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    listViewCanciones()
+                )
+                listViewCancion.adapter = adaptador
+                adaptador.notifyDataSetChanged()
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -150,7 +194,7 @@ class InicioCancion : AppCompatActivity() {
         resultAnadirCancion.launch(intentAddNewCancion)
     }
 
-    fun eliminarCancion(
+    /*fun eliminarCancion(
         idCancionAeliminar: Int
     ){
         val listViewCancion = findViewById<ListView>(R.id.lv_canciones_lista)
@@ -174,6 +218,6 @@ class InicioCancion : AppCompatActivity() {
         )
         listViewCancion .adapter = adaptador
         adaptador.notifyDataSetChanged()
-    }
+    }*/
 
 }

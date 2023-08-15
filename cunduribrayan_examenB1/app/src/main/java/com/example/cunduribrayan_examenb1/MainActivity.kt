@@ -10,6 +10,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        EquipoBaseDeDatos.TablaPlaylist= ESqliteHelperPlaylist_Cancion(this)
+        Registros.arregloPlaylist_Cancion
+
         val btnIniciar = findViewById<Button>(R.id.btn_iniciar)
         btnIniciar.setOnClickListener{
             val intent = Intent(this, InicioPlaylist::class.java)
