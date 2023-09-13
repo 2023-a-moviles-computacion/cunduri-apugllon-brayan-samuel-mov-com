@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.cunduribrayan_proyectob2">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="RemindMe"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.CunduriBrayan_ProyectoB2">
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.EditarCategoria"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.InicioCategorias"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.EditarTareas"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.CrearCategoria"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.CrearTarea"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.InicioTareas"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.CrearCuenta"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.Login"
+            android:exported="true" />
+        <activity
+            android:name="com.example.cunduribrayan_proyectob2.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
